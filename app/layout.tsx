@@ -17,14 +17,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={inter.className}>
+        className="min-h-screen flex flex-col">
         {/* Toaster  */}
-        <header>
+        <header className="border-b sticky top-0 bg-white z-50">
           <Header/>
           {/* Header */}
 
           </header> 
-          <div>
+          <div className="bg-[#F4F2ED] flex-l w-full">
             <main>{children}</main>
             </div> 
       </body>
