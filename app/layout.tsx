@@ -22,13 +22,12 @@ export default function RootLayout({
         className="min-h-screen flex flex-col">
         {/* Toaster  */}
         <header className="border-b sticky top-0 bg-white z-50">
-          <Header/>
+          <Header />
           {/* Header */}
-
-          </header> 
+        </header> 
           <div className="bg-[#F4F2ED] flex-l w-full">
-            <main>{children}</main>
-            </div> 
+            <main className="max-w-6xl mx-auto">{children}</main>
+          </div> 
       </body>
     </html>
     </ClerkProvider>

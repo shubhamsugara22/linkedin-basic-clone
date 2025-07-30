@@ -15,13 +15,13 @@ function Header() {
 		  height={40}
 		  alt="logo"
 		  />
-	  <div className="flex-l">
-		<form className="flex items-center  space-x-1 bg-gray-100 rounded-md flex-l mx-2 max-w-90">
+	  <div className="flex-1">
+		<form className="flex items-center  space-x-1 bg-gray-100 rounded-md flex-l mx-2 max-w-96">
 			<SearchIcon className="h-4 text-gray-600"/>
 			<input
 			  type="text"
 			  placeholder="Search"
-			  className="bg-transparent flex-l outline-none"
+			  className="bg-transparent flex-1 outline-none"
 			  />
 		</form>
 	  </div>
