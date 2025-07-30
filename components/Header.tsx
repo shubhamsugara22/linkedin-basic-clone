@@ -1,7 +1,9 @@
 import Image from "next/image";
+import { Button } from "@/components/ui/button"
 import { Briefcase, MessageSquare, SearchIcon , UsersIcon } from "lucide-react";
 import Link from 'next/link'
 import { HomeIcon } from "lucide-react";
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
 
 function Header() {
   return (
@@ -44,8 +46,16 @@ function Header() {
 		</Link>
 
 		{ /* User Button if signed in  */}
+		<SignedIn>
+			<UserButton/>
+		</SignedIn>
 
 		{ /* Sign in button if not signed in */}
+		<SignedOut>
+			<Button asChild variant="secondary">
+				<SignInButton />
+			</Button>
+		</SignedOut>
 	  </div>
 	</div>
   )
