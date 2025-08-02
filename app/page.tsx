@@ -1,9 +1,18 @@
-import { Button } from "@/components/ui/button";
-
 export default function Home() {
   return (
-      <main className="flex">
-       <h1>LinkedIn Clone</h1>
-       </main>
+      <div className="flex">
+        <section>
+          {/* UserInformation */}
+        </section>
+
+        <section>
+          {/* PostForm */}
+          {/* PostForm */}
+        </section>
+
+        <section>
+          {/* Widget */}
+        </section>
+       </div>
   );
 }
