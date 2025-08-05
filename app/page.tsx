@@ -1,8 +1,10 @@
+import UserInformation  from "@/components/UserInformation";
+
 export default function Home() {
   return (
-      <div className="flex">
+      <div className="grid">
         <section>
-          {/* UserInformation */}
+          <UserInformation />
         </section>
 
         <section>
