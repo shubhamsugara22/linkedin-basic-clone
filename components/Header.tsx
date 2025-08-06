@@ -16,7 +16,7 @@ function Header() {
 		  alt="logo"
 		  />
 	  <div className="flex-1">
-		<form className="flex items-center  space-x-1 bg-gray-100 rounded-md flex-l mx-2 max-w-96">
+		<form className="flex items-center space-x-1 bg-gray-100 p-2 rounded-md flex-1 mx-2 max-w-96">
 			<SearchIcon className="h-4 text-gray-600"/>
 			<input
 			  type="text"
@@ -36,18 +36,18 @@ function Header() {
 		    <UsersIcon className="h-5" />
 		    <p>Network</p>
 		</Link>
-		 <Link href="/" className="icon hidden md:flex">
+		<Link href="/" className="icon hidden md:flex">
 		    <Briefcase className="h-5" />
 		    <p>Jobs</p>
 		</Link>	
 		<Link href="/" className="icon">
-		 <MessageSquare className="h-5"/>
-		 <p>Messaging</p>
+		    <MessageSquare className="h-5"/>
+		    <p>Messaging</p>
 		</Link>
 
 		{ /* User Button if signed in  */}
 		<SignedIn>
-			<UserButton/>
+			<UserButton />
 		</SignedIn>
 
 		{ /* Sign in button if not signed in */}
@@ -58,7 +58,7 @@ function Header() {
 		</SignedOut>
 	  </div>
 	</div>
-  )
+  );
 }
 
-export default Header
+export default Header;
