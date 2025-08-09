@@ -10,7 +10,7 @@ function PostForm() {
   return (
 	<div>
 		<form action="">
-			<div>
+			<div className="flex items-center space-x-2">
 				<Avatar>
 					<AvatarImage />
 					<AvatarFallback>
@@ -19,7 +19,24 @@ function PostForm() {
 					</AvatarFallback>
 				</Avatar>
 
-				<input type="text" />
+				<input 
+				type="text" 
+				name="postInput"
+				placeholder="Start writing a post..."
+				className="flex-1 outline-none rounded-full py-3 px-4 border"
+				/>
+
+				<input type="file" name="image" accept="image/*" hidden/>
+
+				<button type="submit" hidden>
+					Post
+				</button>
+			</div>
+            
+			{/* Preview conditional check */}
+
+			<div>
+				
 			</div>
 		</form>
 	  
