@@ -2,8 +2,13 @@
 
 import { useUser } from "@clerk/nextjs";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { Button } from "./ui/button";
+import { ImageIcon } from "lucide-react";
+import { useRef } from "react";
 
 function PostForm() {
+    const ref =useRef<HTMLFormElement>(null);
+	const fileInputRef = useRef<HTMLInputElement>(null);
 
 	const { user } = useUser();
 
@@ -36,7 +41,12 @@ function PostForm() {
 			{/* Preview conditional check */}
 
 			<div>
-				
+				<Button>
+					<ImageIcon className="mr-2" size={16} color="currentColor"/>
+					Add
+				</Button>
+
+				{/* Add a remove preview button */}
 			</div>
 		</form>
 	  
