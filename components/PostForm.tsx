@@ -4,17 +4,20 @@ import { useUser } from "@clerk/nextjs";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { Button } from "./ui/button";
 import { ImageIcon } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 function PostForm() {
     const ref =useRef<HTMLFormElement>(null);
 	const fileInputRef = useRef<HTMLInputElement>(null);
 
 	const { user } = useUser();
+	const [preview, setPreview ] = useState(false);
+
+	
 
   return (
 	<div>
-		<form action="">
+		<form ref={ref} action="">
 			<div className="flex items-center space-x-2">
 				<Avatar>
 					<AvatarImage />
@@ -24,14 +27,17 @@ function PostForm() {
 					</AvatarFallback>
 				</Avatar>
 
-				<input 
+				<input
+				ref={fileInputRef} 
 				type="text" 
 				name="postInput"
 				placeholder="Start writing a post..."
 				className="flex-1 outline-none rounded-full py-3 px-4 border"
 				/>
 
-				<input type="file" name="image" accept="image/*" hidden/>
+				<input type="file" name="image" accept="image/*" hidden
+				onChange={handleImageChange}
+				/>
 
 				<button type="submit" hidden>
 					Post
