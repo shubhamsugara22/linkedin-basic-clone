@@ -11,7 +11,14 @@ function PostForm() {
 	const fileInputRef = useRef<HTMLInputElement>(null);
 
 	const { user } = useUser();
-	const [preview, setPreview ] = useState(false);
+	const [preview , setPreview ] = useState<string | null>(null);
+
+	const handleImageChange = ( event: React.ChangeEvent<HTMLInputElement>) => {
+		const file = event.target.files?.[0];
+		if (file) {
+			setPreview(URL.createObjectURL(file));
+		}
+	};
 
 	
 
@@ -27,15 +34,19 @@ function PostForm() {
 					</AvatarFallback>
 				</Avatar>
 
-				<input
-				ref={fileInputRef} 
+				<input 
 				type="text" 
 				name="postInput"
 				placeholder="Start writing a post..."
 				className="flex-1 outline-none rounded-full py-3 px-4 border"
 				/>
 
-				<input type="file" name="image" accept="image/*" hidden
+				<input 
+				ref={fileInputRef}
+				type="file" 
+				name="image" 
+				accept="image/*" 
+				hidden
 				onChange={handleImageChange}
 				/>
 
@@ -45,9 +56,15 @@ function PostForm() {
 			</div>
             
 			{/* Preview conditional check */}
+			{preview && (
+				<div className="mt-3">
+					<img src={preview} alt="Preview" className="w-full 
+					object-cover"/>
+				</div>
+			)}
 
 			<div>
-				<Button>
+				<Button type="button" onClick={() => fileInputRef.current?.click()}>
 					<ImageIcon className="mr-2" size={16} color="currentColor"/>
 					Add
 				</Button>
