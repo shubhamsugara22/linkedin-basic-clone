@@ -3,7 +3,7 @@
 import { useUser } from "@clerk/nextjs";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { Button } from "./ui/button";
-import { ImageIcon } from "lucide-react";
+import { ImageIcon, XIcon } from "lucide-react";
 import { useRef, useState } from "react";
 
 function PostForm() {
@@ -58,18 +58,26 @@ function PostForm() {
 			{/* Preview conditional check */}
 			{preview && (
 				<div className="mt-3">
-					<img src={preview} alt="Preview" className="w-full 
-					object-cover"/>
+					<img src={preview} alt="Preview" className="w-full object-cover"/>
 				</div>
 			)}
 
 			<div>
 				<Button type="button" onClick={() => fileInputRef.current?.click()}>
 					<ImageIcon className="mr-2" size={16} color="currentColor"/>
-					Add
+					{preview ? "Change" : "Add" } Image
 				</Button>
 
 				{/* Add a remove preview button */}
+
+				{preview && (
+				<Button variant="outline">
+					<XIcon className="mr-2" size={16} color="currentColor" />
+					Remove Image
+				</Button>
+			
+			)}
+
 			</div>
 		</form>
 	  
