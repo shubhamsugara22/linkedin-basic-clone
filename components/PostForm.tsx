@@ -1,7 +1,7 @@
 'use client';
 
 import { useUser } from "@clerk/nextjs";
-import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { Avatar, AvatarFallback, AvatarImage, createAvatarScope } from "@radix-ui/react-avatar";
 import { Button } from "./ui/button";
 import { ImageIcon, XIcon } from "lucide-react";
 import { useRef, useState } from "react";
@@ -13,6 +13,27 @@ function PostForm() {
 	const { user } = useUser();
 	const [preview , setPreview ] = useState<string | null>(null);
 
+    const handlePostAction = async (formdata: FormData) => {
+		const formDataCopy = formdata;
+		ref.current?.reset();
+
+		const text = formDataCopy.get("postInput") as string;
+
+		if (!text.trim()) {
+			throw new Error("You must provide a post input");
+		}
+
+		setPreview(null);
+
+		try {
+			await createPostAction(formDataCopy);
+		} catch (error) {
+			console.error("Error creating posts", error);
+
+		}
+	};
+
+
 	const handleImageChange = ( event: React.ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files?.[0];
 		if (file) {
@@ -20,11 +41,14 @@ function PostForm() {
 		}
 	};
 
-	
-
   return (
-	<div>
-		<form ref={ref} action="">
+	<div className="mb-2">
+		{/* // Handle Form submission */}
+		<form ref={ref} action={(formData) => {
+			handlePostAction(formData);
+
+		}}
+		className="p-3 bg-white rounded-lg border">
 			<div className="flex items-center space-x-2">
 				<Avatar>
 					<AvatarImage />
@@ -71,16 +95,18 @@ function PostForm() {
 				{/* Add a remove preview button */}
 
 				{preview && (
-				<Button variant="outline">
+				<Button 
+				variant="outline"
+				type="button"
+				onClick={() => setPreview(null)}
+				>
 					<XIcon className="mr-2" size={16} color="currentColor" />
 					Remove Image
 				</Button>
-			
 			)}
-
 			</div>
 		</form>
-	  
+	  <hr className="mt-2 border-gray-300" />
 	</div>
   )
 }
