@@ -30,4 +30,15 @@ interface IPostStatics {
 export interface IPostDocument extends IPost , IPostMethods {} // Singular instace of a post
 interface IPostModel extends IPostStatics, Model<IPostDocument> {} // all posts
 
-const PostSchema = new Schema<IPostDocument>()
+const PostSchema = new Schema<IPostDocument>({
+	user: {
+		userId: { type: String, required: true },
+		userImage: {type: String, required: true },
+		firstName:{type: String, required: true },
+		lastName: {type: String },
+	},
+	text: { type: String, required: true },
+	imageUrl: { type: String },
+	comments: { type: [Schema.types.ObjectId], ref: "Comment", default: [] },
+	likes: { type: [String] },
+});
