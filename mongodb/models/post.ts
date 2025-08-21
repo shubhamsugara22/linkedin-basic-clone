@@ -1,6 +1,6 @@
 import { IUser } from "@/types/user"
-import { IComment } from "./comment";
-import mongoose, { Schema, Document, models, Model } from mongoose;
+import { IComment , ICommentBase } from "./comment";
+import mongoose, { Schema, Document, models, Model } from "mongoose";
 
 export interface IPostBase {
 	user: IUser;
@@ -41,4 +41,15 @@ const PostSchema = new Schema<IPostDocument>({
 	imageUrl: { type: String },
 	comments: { type: [Schema.types.ObjectId], ref: "Comment", default: [] },
 	likes: { type: [String] },
-});
+},
+{
+	timestamps: true,
+}
+);
+PostSchema.methods.likePost = async function (userId: string) {
+	try {
+			await this.updateOne({ $addToSet: { likes: userId}});
+	} catch (error) {
+		throw new Error("Failed to like post: " + error);
+	}
+}
