@@ -48,8 +48,29 @@ const PostSchema = new Schema<IPostDocument>({
 );
 PostSchema.methods.likePost = async function (userId: string) {
 	try {
-			await this.updateOne({ $addToSet: { likes: userId}});
+		await this.updateOne({ $addToSet: { likes: userId}});
 	} catch (error) {
-		throw new Error("Failed to like post: " + error);
+		throw new Error("error when liking post: " + error);
+	}
+}
+PostSchema.methods.unlikePost = async function (userId: string) {
+	try {
+		await this.updateOne({ $pull: { likes: userId}});
+	} catch (error) {
+		throw new Error("error when unliking post: " + error);
+	}
+}
+PostSchema.methods.removePost = async function () {
+	try {
+		await this.model("Post").deleteOne({ _id: this._id });
+	} catch (error) {
+		throw new Error("error when removing post " + error);
+	}
+}
+PostSchema.methods.removePost = async function ( commentToAdd: ICommentBase) {
+	try {
+		
+	} catch (error) {
+	
 	}
 }
