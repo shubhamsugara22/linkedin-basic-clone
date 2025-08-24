@@ -1,5 +1,5 @@
 import { IUser } from "@/types/user"
-import { IComment , ICommentBase } from "./comment";
+import { Comment, IComment , ICommentBase } from "./comment";
 import mongoose, { Schema, Document, models, Model } from "mongoose";
 
 export interface IPostBase {
@@ -69,8 +69,10 @@ PostSchema.methods.removePost = async function () {
 }
 PostSchema.methods.removePost = async function ( commentToAdd: ICommentBase) {
 	try {
-		
+		const comment = await Comment.create(commentToAdd);
+		this.comments.push(comment._id);
+		await this.save();
 	} catch (error) {
-	
+		console.error("error when commenting on post: " + error);
 	}
 }
