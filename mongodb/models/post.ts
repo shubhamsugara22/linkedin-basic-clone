@@ -67,12 +67,31 @@ PostSchema.methods.removePost = async function () {
 		throw new Error("error when removing post " + error);
 	}
 }
-PostSchema.methods.removePost = async function ( commentToAdd: ICommentBase) {
+PostSchema.methods.commentOnPostPost = async function ( commentToAdd: ICommentBase) {
 	try {
 		const comment = await Comment.create(commentToAdd);
 		this.comments.push(comment._id);
 		await this.save();
 	} catch (error) {
 		console.error("error when commenting on post: " + error);
+	}
+};
+PostSchema.methods.getAllComments = async function () {
+	try {
+		await this.populate({
+			path:"comments",
+
+			options: { sort: { createdAt: -1 } }, // sort comments by newest first
+	    });
+		return this.comments;
+	} catch (error) {
+		console.error("error when getting all comments: " + error);
+	}
+};
+PostSchema.statics.getAllPosts = async function () {
+	try {
+
+	} catch (error){
+		
 	}
 }
