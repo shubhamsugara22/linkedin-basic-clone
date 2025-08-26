@@ -90,6 +90,14 @@ PostSchema.methods.getAllComments = async function () {
 };
 PostSchema.statics.getAllPosts = async function () {
 	try {
+		const posts = await this.find()
+		.sort({ createdAt: -1})
+		.populate({
+			path: "comments",
+
+			options: { sort: { createdAt: -1 } },
+		}).populate
+	
 
 	} catch (error){
 		
