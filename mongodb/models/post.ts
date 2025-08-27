@@ -96,10 +96,17 @@ PostSchema.statics.getAllPosts = async function () {
 			path: "comments",
 
 			options: { sort: { createdAt: -1 } },
-		}).populate
-	
-
+		})
+		.lean(); // lean() to convert Mongoose object to plain JS object
+         return posts.map((post: IPostDocument ) => ({
+			...post,
+			_id: post._id.toString(),
+			comments: post.comments?.map((comment: IComment) => ({
+				...comment,
+				_id: comment._id.toString(),
+			})),
+		 }));        
 	} catch (error){
-		
+		console.log("error when getting all posts: " + error);
 	}
 }
