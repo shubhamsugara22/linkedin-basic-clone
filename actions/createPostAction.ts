@@ -18,6 +18,12 @@ export default async function createPOstAction(formData: FormData) {
 	}
 
 	// define user
+	const userDB: IUser = {
+		userId: user.id,
+		userImage: user.imageUrl,
+		firstName: user.firstName || "",
+		lastName: user.lastName || "",
+	};
 
 	// upload image if there is one
 
