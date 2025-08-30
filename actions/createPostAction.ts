@@ -1,5 +1,6 @@
 'use server'
 
+import { Post } from "@/mongodb/models/post";
 import { currentUser } from "@clerk/nextjs/server"
 
 export default async function createPOstAction(formData: FormData) {
@@ -24,6 +25,21 @@ export default async function createPOstAction(formData: FormData) {
 		firstName: user.firstName || "",
 		lastName: user.lastName || "",
 	};
+    
+	try {
+	if (image.size > 0 ) {
+
+	}else {
+
+		const body = {
+			user: userDB,
+			text: postInput,
+		};
+	   await Post.create(body);
+	}
+   }  catch (error: any) {
+	 throw new Error("failed to create post", error);
+   }
 
 	// upload image if there is one
 
