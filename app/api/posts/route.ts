@@ -1,4 +1,5 @@
 import { IUser } from "@/types/user";
+import connectDB from "@/mongodb/db";
 import { NextResponse } from "next/server";
 
 export interface AddPostRequestBody {
@@ -13,6 +14,7 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
 	try {
+		await connectDB()
 
 	} catch (error) {
 		return NextResponse.json(
