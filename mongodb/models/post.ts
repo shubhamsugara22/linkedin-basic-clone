@@ -39,7 +39,7 @@ const PostSchema = new Schema<IPostDocument>({
 	},
 	text: { type: String, required: true },
 	imageUrl: { type: String },
-	comments: { type: [Schema.types.ObjectId], ref: "Comment", default: [] },
+	comments: { type: [Schema.Types.ObjectId], ref: "Comment", default: [] },
 	likes: { type: [String] },
 },
 {

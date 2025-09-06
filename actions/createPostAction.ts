@@ -2,13 +2,14 @@
 
 import { AddPostRequestBody } from "@/app/api/posts/route";
 import { Post } from "@/mongodb/models/post";
-import { currentUser } from "@clerk/nextjs/server"
+import { currentUser } from "@clerk/nextjs/server";
+import { IUser } from "@/types/user";
 
 export default async function createPOstAction(formData: FormData) {
 	const user = await currentUser()
 	
 	if (!user) {
-		throw new Error("USer not authenticated")
+		throw new Error("User not authenticated")
 	}
 
 	const postInput = formData.get("postInput") as string;
@@ -44,7 +45,8 @@ export default async function createPOstAction(formData: FormData) {
 	   await Post.create(body);
 	}
    }  catch (error: any ) {
-	 throw new Error("failed to create post", error);
+	console.error("failed to create post", error);
+	 throw new Error("failed to create post");
    }
 
 	// upload image if there is one

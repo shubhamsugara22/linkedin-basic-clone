@@ -1,6 +1,6 @@
 import { IUser } from "@/types/user"
 
-import mongoose, { Schema, Document, models, Model } from mongoose;
+import mongoose, { Schema, Document, models } from "mongoose";
 
 export interface ICommentBase {
 	user: IUser;

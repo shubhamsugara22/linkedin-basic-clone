@@ -10,7 +10,7 @@ export interface AddPostRequestBody {
 	imageUrl?: string | null ;
 }
 
-export async function POST(request: Request) {(
+export async function POST(request: Request) {
 	auth.protect();
 
 	try {
@@ -25,12 +25,12 @@ export async function POST(request: Request) {(
 	return NextResponse.json({ message: "Post created Successfully", post});
 	} catch (error) {
 		return NextResponse.json(
-			{ error:  "An error occurred while creating the post" },
+			{ error:  `An error occurred while creating the post ${error}` },
 			{ status: 500 }
 		);
 	}
 }
-export async function GET(request: Request) {
+export async function GET() {
 	try {
 		await connectDB();
 
@@ -40,7 +40,7 @@ export async function GET(request: Request) {
 
 	} catch (error) {
 		return NextResponse.json(
-			{ error:  "An error occurred while fetching posts" },
+			{ error:  `An error occurred while fetching posts ${error}` },
 			{ status: 500 }
 		);
 
