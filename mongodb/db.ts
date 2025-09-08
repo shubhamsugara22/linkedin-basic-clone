@@ -1,6 +1,9 @@
 import mongoose from 'mongoose';
 
-const connectionString =  'mongodb+srv://username:password12!@linkedin-clone-ssugara-db.mongocluster.cosmos.azure.com/?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000'
+const username = process.env.MONGO_USERNAME;
+const password = process.env.MONGO_PASSWORD;
+
+const connectionString =  `mongodb+srv://${username}:${password}@linkedin-clone-ssugara-db.mongocluster.cosmos.azure.com/?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000`;
 
 if (!connectionString) {
 	throw new Error("please provide a valid connection string");

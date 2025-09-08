@@ -11,6 +11,7 @@ export async function GET (
 
 	try {
 		const post = await Post.findById(params.post_id);
+		
 		if (!post) {
 			return NextResponse.json({ error: "Post not found" }, { status: 404 });
 	}
@@ -21,4 +22,11 @@ export async function GET (
 		{ status: 500 }
 	);
  }
+}
+
+export async function DELETE (
+	request: Request,
+	{ params }: { params : { post_id: string } }
+) {
+	auth.protect();
 }
