@@ -27,6 +27,8 @@ export default async function createPOstAction(formData: FormData) {
 		firstName: user.firstName || "",
 		lastName: user.lastName || "",
 	};
+
+	// ...com/api/posts
     
 	try {
 	if (image.size > 0 ) {
