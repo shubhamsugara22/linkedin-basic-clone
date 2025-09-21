@@ -4,8 +4,11 @@ import { AddPostRequestBody } from "@/app/api/posts/route";
 import { Post } from "@/mongodb/models/post";
 import { currentUser } from "@clerk/nextjs/server";
 import { IUser } from "@/types/user";
+import connectDB from "@/mongodb/db"; // <-- Add this import
 
-export default async function createPOstAction(formData: FormData) {
+
+export default async function createPostAction(formData: FormData) {
+	await connectDB();
 	const user = await currentUser()
 	
 	if (!user) {
@@ -35,7 +38,7 @@ export default async function createPOstAction(formData: FormData) {
 		const body: AddPostRequestBody = {
 			user: userDB,
 			text: postInput,
-			imageUrl: imageUrl || null,
+			// imageUrl: image_url,
 		};
 		await Post.create(body);
 	} else {
@@ -44,10 +47,11 @@ export default async function createPOstAction(formData: FormData) {
 			user: userDB,
 			text: postInput,
 		};
+
 	   await Post.create(body);
 	}
-   }  catch (error: any ) {
-	console.error("failed to create post", error);
+   }  catch (error) {
+	console.error("failed to create post", error); // Log the original error
 	 throw new Error("failed to create post");
    }
 

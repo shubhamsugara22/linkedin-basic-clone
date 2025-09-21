@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
-const username = process.env.MONGO_USERNAME;
-const password = process.env.MONGO_PASSWORD;
+const username = process.env.MONGO_DB_USERNAME;
+const password = process.env.MONGO_DB_PASSWORD;
 
 const connectionString =  `mongodb+srv://${username}:${password}@linkedin-clone-ssugara-db.mongocluster.cosmos.azure.com/?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000`;
 
